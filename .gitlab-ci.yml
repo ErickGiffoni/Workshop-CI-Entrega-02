@@ -24,7 +24,7 @@ build-front:
     # Faz o build do frontend usando o Docker
     - docker build -f ./frontend/Dockerfile -t $PROJECT_NAME:build ./frontend
     # Faz login no Docker
-    - docker login -u $docker_user -p $docker_password
+    - echo $docker_password | docker login -u $docker_user --password-stdin
     # Publica a imagem construida no Docker Hub do $docker_user
     - docker push $PROJECT_NAME:build
   after_script:
@@ -38,7 +38,7 @@ build-backend:
     # Faz o build do backend usando o Docker
     - docker build -f ./backend/Dockerfile -t $PROJECT_NAME:build-back ./backend
     # Faz login no Docker
-    - docker login -u $docker_user -p $docker_password
+    - echo $docker_password | docker login -u $docker_user --password-stdin
     # Publica a imagem construida no Docker Hub do $docker_user
     - docker push $PROJECT_NAME:build-back
   after_script:
