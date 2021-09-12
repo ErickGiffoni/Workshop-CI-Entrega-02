@@ -4,3 +4,14 @@ stages:
   - test
   - deploy
 
+build-front:
+  image: node:14
+  stage: build
+  before_script:
+    - echo "[.] Building frontend..."
+    - npm install -g npm@latest
+  script:
+    - cd frontend
+    - npm install
+  after_script:
+    - echo "[x] Successfully built frontend !"
