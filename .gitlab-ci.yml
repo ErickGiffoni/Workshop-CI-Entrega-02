@@ -1,0 +1,6 @@
+# Gitlab repository link: https://gitlab.com/ErickGiffoni/GCES-Workshop-CI-Entrega-02
+stages:
+  - build
+  - test
+  - deploy
+
