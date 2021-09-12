@@ -41,3 +41,14 @@ build-backend:
     - docker push $PROJECT_NAME:build-back
   after_script:
     - echo "[x] Successfully built backend !"
+
+test-frontend:
+  stage: test
+  before_script:
+    - echo "[.] Testing frontend..."
+  script:
+    # Usa o proprio docker-compose para o teste, passando como entrypoint
+    # o comando a ser executado
+    - docker-compose run --entrypoint "npm run coverage" frontend
+  after_script:
+    - echo "[x] Frontend successfully tested !"
