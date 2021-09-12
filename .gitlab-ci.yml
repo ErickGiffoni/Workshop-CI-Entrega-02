@@ -4,6 +4,13 @@ stages:
   - test
   - deploy
 
+# Usa uma imagem Docker do Docker para CI
+image: docker:20.10.8
+
+services:
+  # Docker in Docker: usa para fazer build usando o Dockerfile
+  - docker:dind
+
 build-front:
   image: node:14
   stage: build
