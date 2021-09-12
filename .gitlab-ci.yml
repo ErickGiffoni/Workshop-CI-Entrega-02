@@ -26,7 +26,7 @@ build-front:
     # Faz login no Docker
     - echo $docker_password | docker login -u $docker_user --password-stdin
     # Publica a imagem construida no Docker Hub do $docker_user
-    - docker push $PROJECT_NAME:build
+    - docker push $docker_user/$PROJECT_NAME:build
   after_script:
     - echo "[x] Successfully built frontend !"
 
@@ -40,7 +40,7 @@ build-backend:
     # Faz login no Docker
     - echo $docker_password | docker login -u $docker_user --password-stdin
     # Publica a imagem construida no Docker Hub do $docker_user
-    - docker push $PROJECT_NAME:build-back
+    - docker push $docker_user/$PROJECT_NAME:build-back
   after_script:
     - echo "[x] Successfully built backend !"
 
