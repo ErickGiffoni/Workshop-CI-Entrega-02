@@ -11,14 +11,19 @@ services:
   # Docker in Docker: usa para fazer build usando o Dockerfile
   - docker:dind
 
+variables:
+  PROJECT_NAME: ErickGiffoni_GCES_entrega02
+
 build-front:
-  image: node:14
   stage: build
   before_script:
     - echo "[.] Building frontend..."
-    - npm install -g npm@latest
   script:
-    - cd frontend
-    - npm install
+    # Faz o build do frontend usando o Docker
+    - docker build -f ./frontend/Dockerfile -t $PROJECT_NAME:build ./frontend
+    # Faz login no Docker
+    - docker login -u $docker_user -p $docker_password
+    # Publica a imagem construida no Docker Hub do $docker_user
+    - docker push $PROJECT_NAME:build
   after_script:
     - echo "[x] Successfully built frontend !"
