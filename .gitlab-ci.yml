@@ -52,3 +52,14 @@ test-frontend:
     - docker-compose run --entrypoint "npm run coverage" frontend
   after_script:
     - echo "[x] Frontend successfully tested !"
+
+test-backend:
+  stage: test
+  before_script:
+    - echo "[.] Testing backend..."
+  script:
+    # Usa o proprio docker-compose para o teste, passando como entrypoint
+    # o comando a ser executado
+    - docker-compose run --entrypoint "npm run unittest" backend
+  after_script:
+    - echo "[x] Backend successfully tested !"
