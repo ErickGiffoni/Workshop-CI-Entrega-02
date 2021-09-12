@@ -12,9 +12,9 @@ services:
   - docker:dind
 
 variables:
-  PROJECT_NAME: erickgiffoni_gces_entrega02
   docker_user: $docker_user
   docker_password: $docker_password
+  PROJECT_NAME: $docker_user/erickgiffoni_gces_entrega02
 
 build-front:
   stage: build
@@ -26,7 +26,7 @@ build-front:
     # Faz login no Docker
     - echo $docker_password | docker login -u $docker_user --password-stdin
     # Publica a imagem construida no Docker Hub do $docker_user
-    - docker push $docker_user/$PROJECT_NAME:build
+    - docker push $PROJECT_NAME:build
   after_script:
     - echo "[x] Successfully built frontend !"
 
@@ -40,7 +40,7 @@ build-backend:
     # Faz login no Docker
     - echo $docker_password | docker login -u $docker_user --password-stdin
     # Publica a imagem construida no Docker Hub do $docker_user
-    - docker push $docker_user/$PROJECT_NAME:build-back
+    - docker push $PROJECT_NAME:build-back
   after_script:
     - echo "[x] Successfully built backend !"
 
