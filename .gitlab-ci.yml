@@ -12,7 +12,7 @@ services:
   - docker:dind
 
 variables:
-  PROJECT_NAME: ErickGiffoni_GCES_entrega02
+  PROJECT_NAME: erickgiffoni_gces_entrega02
 
 build-front:
   stage: build
