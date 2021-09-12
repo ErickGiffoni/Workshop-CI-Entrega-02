@@ -13,6 +13,8 @@ services:
 
 variables:
   PROJECT_NAME: erickgiffoni_gces_entrega02
+  docker_user: $docker_user
+  docker_password: $docker_password
 
 build-front:
   stage: build
