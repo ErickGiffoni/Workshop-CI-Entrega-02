@@ -27,3 +27,17 @@ build-front:
     - docker push $PROJECT_NAME:build
   after_script:
     - echo "[x] Successfully built frontend !"
+
+build-backend:
+  stage: build
+  before_script:
+    - echo "[.] Building backend..."
+  script:
+    # Faz o build do backend usando o Docker
+    - docker build -f ./backend/Dockerfile -t $PROJECT_NAME:build-back ./backend
+    # Faz login no Docker
+    - docker login -u $docker_user -p $docker_password
+    # Publica a imagem construida no Docker Hub do $docker_user
+    - docker push $PROJECT_NAME:build-back
+  after_script:
+    - echo "[x] Successfully built backend !"
