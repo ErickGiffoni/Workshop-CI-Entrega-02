@@ -58,11 +58,12 @@ test-frontend:
     - apk add --update --no-cache curl
     - echo "[..] Dependencies for docker-compose installed !"
     - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    - chmod +x /usr/local/bin/docker-compose
+    - mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+    - chmod +x /usr/bin/docker-compose
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
-    - /usr/local/bin/docker-compose run --entrypoint "npm run coverage" frontend
+    - /usr/bin/docker-compose run --entrypoint "npm run coverage" frontend
   after_script:
     - echo "[x] Frontend successfully tested !"
 
@@ -76,10 +77,11 @@ test-backend:
     - apk add --update --no-cache curl
     - echo "[..] Dependencies for docker-compose installed !"
     - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    - chmod +x /usr/local/bin/docker-compose
+    - mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+    - chmod +x /usr/bin/docker-compose
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
-    - /usr/local/bin/docker-compose run --entrypoint "npm run unittest" backend
+    - /usr/bin/docker-compose run --entrypoint "npm run unittest" backend
   after_script:
     - echo "[x] Backend successfully tested !"
