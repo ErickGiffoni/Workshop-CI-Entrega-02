@@ -46,20 +46,13 @@ build-backend:
     - echo "[x] Successfully built backend !"
 
 # Configuracoes para os jobs de Teste
-    # Usa uma imagem Linux (Alpine) e instala o docker-compose nela
+    # Usa uma imagem docker/compose
 
 test-frontend:
   image: docker/compose:latest
   stage: test
   before_script:
     - echo "[.] Testing frontend..."
-    # - apk update
-    # - apk add py-pip python3-dev libffi-dev openssl-dev gcc libc-dev rust cargo make
-    # - apk add --update --no-cache curl
-    # - echo "[..] Dependencies for docker-compose installed !"
-    # - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    # - mv /usr/local/bin/docker-compose /usr/bin/docker-compose
-    # - chmod +x /usr/bin/docker-compose
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
@@ -68,20 +61,13 @@ test-frontend:
     - echo "[x] Frontend successfully tested !"
 
 test-backend:
-  image: alpine:3.14
+  image: docker/compose
   stage: test
   before_script:
     - echo "[.] Testing backend..."
-    - apk update
-    - apk add py-pip python3-dev libffi-dev openssl-dev gcc libc-dev rust cargo make
-    - apk add --update --no-cache curl
-    - echo "[..] Dependencies for docker-compose installed !"
-    - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    - mv /usr/local/bin/docker-compose /usr/bin/docker-compose
-    - chmod +x /usr/bin/docker-compose
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
-    - /usr/bin/docker-compose run --entrypoint "npm run unittest" backend
+    - docker-compose run --entrypoint "npm run unittest" backend
   after_script:
     - echo "[x] Backend successfully tested !"
