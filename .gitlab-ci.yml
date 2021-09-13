@@ -55,8 +55,8 @@ test-frontend:
     - apk update
     - apk add py-pip python3-dev libffi-dev openssl-dev gcc libc-dev rust cargo make
     - echo "[..] Dependencies for docker-compose installed !"
-    - sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    - sudo chmod +x /usr/local/bin/docker-compose
+    - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    - chmod +x /usr/local/bin/docker-compose
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
@@ -72,8 +72,8 @@ test-backend:
     - apk update
     - apk add py-pip python3-dev libffi-dev openssl-dev gcc libc-dev rust cargo make
     - echo "[..] Dependencies for docker-compose installed !"
-    - sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    - sudo chmod +x /usr/local/bin/docker-compose
+    - curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    - chmod +x /usr/local/bin/docker-compose
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
