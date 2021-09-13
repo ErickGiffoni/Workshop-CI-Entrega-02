@@ -44,10 +44,17 @@ build-backend:
   after_script:
     - echo "[x] Successfully built backend !"
 
+# Configuracoes para os jobs de Teste
+    # Usa uma imagem Linux (Alpine) e instala o docker-compose nela
+
 test-frontend:
+  image: alpine:3.14
   stage: test
   before_script:
     - echo "[.] Testing frontend..."
+    - apk update
+    - apk add py-pip python3-dev libffi-dev openssl-dev gcc libc-dev rust cargo make
+    - echo "[..] Dependencies for docker-compose installed !"
     - sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     - sudo chmod +x /usr/local/bin/docker-compose
   script:
@@ -58,9 +65,13 @@ test-frontend:
     - echo "[x] Frontend successfully tested !"
 
 test-backend:
+  image: alpine:3.14
   stage: test
   before_script:
     - echo "[.] Testing backend..."
+    - apk update
+    - apk add py-pip python3-dev libffi-dev openssl-dev gcc libc-dev rust cargo make
+    - echo "[..] Dependencies for docker-compose installed !"
     - sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     - sudo chmod +x /usr/local/bin/docker-compose
   script:
