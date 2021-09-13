@@ -2,7 +2,8 @@
 stages:
   - build
   - test
-  - deploy
+  # - deploy # deploy esta sendo feito ao final do processo de build, em que
+             # as imagens geradas sao enviadas ao Docker Hub
 
 # Usa uma imagem Docker do Docker para CI
 image: docker:20.10.8
@@ -61,7 +62,7 @@ test-frontend:
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
-    - docker-compose run --entrypoint "npm run coverage" frontend
+    - /usr/local/bin/docker-compose run --entrypoint "npm run coverage" frontend
   after_script:
     - echo "[x] Frontend successfully tested !"
 
@@ -79,6 +80,6 @@ test-backend:
   script:
     # Usa o proprio docker-compose para o teste, passando como entrypoint
     # o comando a ser executado
-    - docker-compose run --entrypoint "npm run unittest" backend
+    - /usr/local/bin/docker-compose run --entrypoint "npm run unittest" backend
   after_script:
     - echo "[x] Backend successfully tested !"
